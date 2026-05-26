@@ -45,6 +45,16 @@ body { background: #111114; font-family: Arial, Helvetica, sans-serif; padding: 
 .minilb { font-size: 12px; color: rgba(255,255,255,0.35); margin-bottom: 4px; }
 .minivl { font-size: 18px; font-weight: bold; }
 .wm { text-align: right; font-size: 11px; color: rgba(255,255,255,0.08); letter-spacing: 0.15em; text-transform: uppercase; padding: 6px 4px 16px; }
+
+/* Alertas */
+.alerta { border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; display: none; }
+.alerta-aviso { background: rgba(250,168,40,0.12); border: 1px solid rgba(250,168,40,0.35); }
+.alerta-dica  { background: rgba(92,201,138,0.10); border: 1px solid rgba(92,201,138,0.3); }
+.alerta-titulo { font-size: 13px; font-weight: bold; margin-bottom: 6px; }
+.alerta-aviso .alerta-titulo { color: #faa828; }
+.alerta-dica  .alerta-titulo { color: #5cc98a; }
+.alerta-texto { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+.alerta-destaque { font-weight: bold; color: #fff; }
 </style>
 </head>
 <body>
@@ -80,6 +90,18 @@ body { background: #111114; font-family: Arial, Helvetica, sans-serif; padding: 
     </div>
   </div>
   <button type="button" class="btn" id="btnCalc">Calcular</button>
+</div>
+
+<!-- Alerta de virada de faixa -->
+<div class="alerta alerta-aviso" id="alerta-virada">
+  <div class="alerta-titulo">⚠️ Atencao: virada de faixa!</div>
+  <div class="alerta-texto" id="alerta-virada-texto"></div>
+</div>
+
+<!-- Dica de preco ideal -->
+<div class="alerta alerta-dica" id="alerta-dica">
+  <div class="alerta-titulo">💡 Dica de preco ideal</div>
+  <div class="alerta-texto" id="alerta-dica-texto"></div>
 </div>
 
 <div class="card">
@@ -130,17 +152,31 @@ function pct(v) {
 }
 function set(id, txt) { var e = document.getElementById(id); if (e) e.innerHTML = txt; }
 function cor(id, c)   { var e = document.getElementById(id); if (e) e.style.color = c; }
+function show(id)     { var e = document.getElementById(id); if (e) e.style.display = 'block'; }
+function hide(id)     { var e = document.getElementById(id); if (e) e.style.display = 'none'; }
+
+function getTaxa(p) {
+  if (p <= 79.99)  return p * 20 / 100 + 4;
+  if (p <= 99.99)  return p * 14 / 100 + 16;
+  if (p <= 199.99) return p * 14 / 100 + 20;
+  return p * 14 / 100 + 26;
+}
+
+function getLucro(p, custo) {
+  return p - getTaxa(p) - custo;
+}
 
 function calcular() {
   var custo = parseFloat(document.getElementById('custo').value) || 0;
   var preco  = parseFloat(document.getElementById('preco').value) || 0;
   if (preco <= 0) { alert('Digite o preco de venda!'); return; }
 
-  var taxa, faixa;
-  if      (preco <= 79.99)  { taxa = preco*20/100+4;  faixa = 'ate R$79,99'; }
-  else if (preco <= 99.99)  { taxa = preco*14/100+16; faixa = 'R$80-99,99'; }
-  else if (preco <= 199.99) { taxa = preco*14/100+20; faixa = 'R$100-199,99'; }
-  else                      { taxa = preco*14/100+26; faixa = 'acima R$200'; }
+  var taxa  = getTaxa(preco);
+  var faixa;
+  if      (preco <= 79.99)  faixa = 'ate R$79,99';
+  else if (preco <= 99.99)  faixa = 'R$80-99,99';
+  else if (preco <= 199.99) faixa = 'R$100-199,99';
+  else                      faixa = 'acima R$200';
 
   var recebido = preco - taxa;
   var lucro    = recebido - custo;
@@ -156,6 +192,51 @@ function calcular() {
   set('o-marg',   (margem < 0 ? '-'  : '') + pct(margem)); cor('o-marg',  margem < 0 ? '#f07a60' : '#5cc98a');
   set('o-marg2',  (margem < 0 ? '-'  : '') + pct(margem)); cor('o-marg2', margem < 0 ? '#f07a60' : '#5cc98a');
   set('o-taxapct', pct(taxapct));
+
+  /* ---------- ALERTAS DE VIRADA DE FAIXA ----------
+     Faixas: 0-79.99 | 80-99.99 | 100-199.99 | 200+
+     Verificamos se o preco esta logo ACIMA de uma virada
+     e se o preco anterior (teto da faixa) daria mais lucro.
+  */
+  hide('alerta-virada');
+  hide('alerta-dica');
+
+  var viradas = [
+    { limite: 79.99, teto: 79.99 },
+    { limite: 99.99, teto: 99.99 },
+    { limite: 199.99, teto: 199.99 }
+  ];
+
+  var margem_aviso = 5; // avisa se o preco estiver ate R$5 acima da virada
+
+  for (var i = 0; i < viradas.length; i++) {
+    var lim = viradas[i].limite;
+    var teto = viradas[i].teto;
+
+    if (preco > lim && preco <= lim + margem_aviso) {
+      var taxaAtual  = getTaxa(preco);
+      var taxaTeto   = getTaxa(teto);
+      var diferencaTaxa = taxaAtual - taxaTeto;
+      var lucroTeto  = getLucro(teto, custo);
+      var lucroAtual = getLucro(preco, custo);
+      var diferencaLucro = lucroAtual - lucroTeto;
+
+      var txt = 'Vendendo por <span class="alerta-destaque">' + fmt(preco) + '</span> a taxa sobe para <span class="alerta-destaque">' + fmt(taxaAtual) + '</span>. ' +
+                'Vendendo por <span class="alerta-destaque">' + fmt(teto) + '</span> a taxa seria apenas <span class="alerta-destaque">' + fmt(taxaTeto) + '</span> ' +
+                '(diferenca de <span class="alerta-destaque">' + fmt(diferencaTaxa) + '</span> a mais em taxa).';
+      set('alerta-virada-texto', txt);
+      show('alerta-virada');
+
+      if (lucroTeto > lucroAtual) {
+        var dicaTxt = 'Vendendo por <span class="alerta-destaque">' + fmt(teto) + '</span> voce lucraria <span class="alerta-destaque">' + fmt(lucroTeto) + '</span>, ' +
+                      'que e <span class="alerta-destaque">' + fmt(-diferencaLucro) + ' a mais</span> do que vendendo por ' + fmt(preco) + '. ' +
+                      'Considere usar o preco <span class="alerta-destaque">' + fmt(teto) + '</span>!';
+        set('alerta-dica-texto', dicaTxt);
+        show('alerta-dica');
+      }
+      break;
+    }
+  }
 }
 
 document.getElementById('btnCalc').addEventListener('click', calcular);
