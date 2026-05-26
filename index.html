@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#EE4D2D">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Shopee Calc">
+<link rel="manifest" href="manifest.json">
+<title>Calculadora Shopee - NeryCorp</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body { background: #111114; font-family: Arial, Helvetica, sans-serif; padding: 12px; -webkit-text-size-adjust: 100%; min-height: 100vh; }
+.header { background: #EE4D2D; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; }
+.logo { width: 42px; height: 42px; background: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.t1 { font-size: 17px; font-weight: bold; color: #fff; }
+.t2 { font-size: 12px; color: rgba(255,255,255,0.75); margin-top: 2px; }
+.card { background: #1e1e24; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+.sec { font-size: 11px; font-weight: bold; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 12px; }
+.field { margin-bottom: 10px; }
+.field:last-of-type { margin-bottom: 0; }
+.field label { font-size: 13px; color: rgba(255,255,255,0.5); display: block; margin-bottom: 5px; }
+.irow { display: flex; align-items: center; }
+.cur { font-size: 15px; font-weight: bold; color: rgba(255,255,255,0.4); margin-right: 8px; }
+.irow input { flex: 1; font-size: 22px; padding: 10px 12px; background: #111114; border: 1.5px solid rgba(255,255,255,0.15); color: #ffffff; border-radius: 8px; width: 100%; outline: none; -webkit-appearance: none; appearance: none; }
+.irow input:focus { border-color: #EE4D2D; }
+.btn { display: block; width: 100%; padding: 16px; background: #EE4D2D; color: #fff; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 14px; -webkit-appearance: none; appearance: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+.btn:active { background: #cc3d1f; }
+.row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 15px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.row:last-child { border: none; }
+.rl { color: rgba(255,255,255,0.45); }
+.rv { font-weight: bold; color: rgba(255,255,255,0.85); }
+.rn { font-weight: bold; color: #f07a60; }
+.ch { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.badge { font-size: 11px; padding: 3px 9px; border-radius: 20px; background: rgba(238,77,45,0.2); color: #f07a60; font-weight: bold; }
+.lucro { background: #111114; border-radius: 8px; padding: 14px; margin-top: 12px; display: flex; justify-content: space-between; align-items: center; }
+.ll { font-size: 11px; font-weight: bold; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 4px; }
+.lv { font-size: 28px; font-weight: bold; }
+.ml { font-size: 12px; color: rgba(255,255,255,0.35); text-align: right; margin-bottom: 4px; }
+.mv { font-size: 22px; font-weight: bold; text-align: right; }
+.g2 { display: flex; gap: 8px; margin-top: 10px; }
+.mini { background: #111114; border-radius: 8px; padding: 10px 12px; flex: 1; }
+.minilb { font-size: 12px; color: rgba(255,255,255,0.35); margin-bottom: 4px; }
+.minivl { font-size: 18px; font-weight: bold; }
+.wm { text-align: right; font-size: 11px; color: rgba(255,255,255,0.08); letter-spacing: 0.15em; text-transform: uppercase; padding: 6px 4px 16px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">
+    <svg width="28" height="28" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100" height="100" rx="16" fill="#EE4D2D"/>
+      <path d="M50 18C39.5 18 31 26.5 31 37c0 5.2 2.1 9.9 5.5 13.3L50 82l13.5-31.7C66.9 46.9 69 42.2 69 37c0-10.5-8.5-19-19-19z" fill="white"/>
+      <circle cx="50" cy="37" r="8" fill="#EE4D2D"/>
+    </svg>
+  </div>
+  <div>
+    <div class="t1">Calculadora Shopee</div>
+    <div class="t2">Precificacao com taxas da plataforma</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="sec">Entradas</div>
+  <div class="field">
+    <label for="custo">Custo do produto</label>
+    <div class="irow">
+      <span class="cur">R$</span>
+      <input type="number" id="custo" placeholder="0,00" min="0" step="0.01" inputmode="decimal" autocomplete="off" />
+    </div>
+  </div>
+  <div class="field">
+    <label for="preco">Preco de venda</label>
+    <div class="irow">
+      <span class="cur">R$</span>
+      <input type="number" id="preco" placeholder="0,00" min="0" step="0.01" inputmode="decimal" autocomplete="off" />
+    </div>
+  </div>
+  <button type="button" class="btn" id="btnCalc">Calcular</button>
+</div>
+
+<div class="card">
+  <div class="ch">
+    <div class="sec" style="margin:0;">Resumo</div>
+    <span class="badge" id="faixa">faixa --</span>
+  </div>
+  <div class="row"><span class="rl">Preco de venda</span><span class="rv" id="o-venda">--</span></div>
+  <div class="row"><span class="rl">Taxa Shopee</span><span class="rn" id="o-taxa">--</span></div>
+  <div class="row"><span class="rl">Valor recebido</span><span class="rv" id="o-rec">--</span></div>
+  <div class="row"><span class="rl">Custo do produto</span><span class="rn" id="o-custo">--</span></div>
+  <div class="lucro">
+    <div>
+      <div class="ll">Lucro liquido</div>
+      <div class="lv" id="o-lucro" style="color:#5cc98a;">R$ 0,00</div>
+    </div>
+    <div>
+      <div class="ml">margem</div>
+      <div class="mv" id="o-marg" style="color:#5cc98a;">--</div>
+    </div>
+  </div>
+  <div class="g2">
+    <div class="mini">
+      <div class="minilb">Taxa total</div>
+      <div class="minivl" id="o-taxapct" style="color:#f07a60;">--</div>
+    </div>
+    <div class="mini">
+      <div class="minilb">Margem</div>
+      <div class="minivl" id="o-marg2" style="color:#5cc98a;">--</div>
+    </div>
+  </div>
+</div>
+
+<div class="wm">NeryCorp</div>
+
+<script>
+function fmt(v) {
+  var n = v < 0 ? -v : v;
+  var cents = Math.round(n * 100);
+  var reais = Math.floor(cents / 100);
+  var dec = cents % 100;
+  return 'R$ ' + reais + ',' + (dec < 10 ? '0' + dec : dec);
+}
+function pct(v) {
+  var n = v < 0 ? -v : v;
+  var s = Math.round(n * 10);
+  return Math.floor(s / 10) + ',' + (s % 10) + '%';
+}
+function set(id, txt) { var e = document.getElementById(id); if (e) e.innerHTML = txt; }
+function cor(id, c)   { var e = document.getElementById(id); if (e) e.style.color = c; }
+
+function calcular() {
+  var custo = parseFloat(document.getElementById('custo').value) || 0;
+  var preco  = parseFloat(document.getElementById('preco').value) || 0;
+  if (preco <= 0) { alert('Digite o preco de venda!'); return; }
+
+  var taxa, faixa;
+  if      (preco <= 79.99)  { taxa = preco*20/100+4;  faixa = 'ate R$79,99'; }
+  else if (preco <= 99.99)  { taxa = preco*14/100+16; faixa = 'R$80-99,99'; }
+  else if (preco <= 199.99) { taxa = preco*14/100+20; faixa = 'R$100-199,99'; }
+  else                      { taxa = preco*14/100+26; faixa = 'acima R$200'; }
+
+  var recebido = preco - taxa;
+  var lucro    = recebido - custo;
+  var margem   = lucro / preco * 100;
+  var taxapct  = taxa  / preco * 100;
+
+  set('faixa',    faixa);
+  set('o-venda',  fmt(preco));
+  set('o-taxa',   '- ' + fmt(taxa));
+  set('o-rec',    fmt(recebido));
+  set('o-custo',  '- ' + fmt(custo));
+  set('o-lucro',  (lucro  < 0 ? '- ' : '') + fmt(lucro));  cor('o-lucro', lucro  < 0 ? '#f07a60' : '#5cc98a');
+  set('o-marg',   (margem < 0 ? '-'  : '') + pct(margem)); cor('o-marg',  margem < 0 ? '#f07a60' : '#5cc98a');
+  set('o-marg2',  (margem < 0 ? '-'  : '') + pct(margem)); cor('o-marg2', margem < 0 ? '#f07a60' : '#5cc98a');
+  set('o-taxapct', pct(taxapct));
+}
+
+document.getElementById('btnCalc').addEventListener('click', calcular);
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "Calculadora Shopee - NeryCorp",
+  "short_name": "Shopee Calc",
+  "description": "Calculadora de precificacao para Shopee",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111114",
+  "theme_color": "#EE4D2D",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
