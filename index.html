@@ -29,28 +29,25 @@ body { background: #111114; font-family: Arial, Helvetica, sans-serif; padding: 
 .irow input:focus { border-color: #EE4D2D; }
 .btn { display: block; width: 100%; padding: 16px; background: #EE4D2D; color: #fff; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 14px; -webkit-appearance: none; appearance: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 .btn:active { background: #cc3d1f; }
-
-/* Toggle custos extras */
 .extras-toggle { display: flex; justify-content: space-between; align-items: center; cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation; padding: 2px 0; }
 .extras-toggle-label { font-size: 14px; font-weight: bold; color: rgba(255,255,255,0.75); }
 .extras-badge { font-size: 11px; padding: 3px 9px; border-radius: 20px; background: rgba(238,77,45,0.2); color: #f07a60; font-weight: bold; }
-.extras-arrow { font-size: 16px; color: rgba(255,255,255,0.4); transition: transform 0.2s; }
+.extras-arrow { font-size: 16px; color: rgba(255,255,255,0.4); transition: transform 0.2s; display: inline-block; }
 .extras-arrow.open { transform: rotate(180deg); }
 .extras-body { display: none; margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.07); padding-top: 12px; }
 .extras-body.open { display: block; }
-
-/* Aviso imposto */
 .aviso-imposto { background: rgba(250,168,40,0.1); border: 1px solid rgba(250,168,40,0.3); border-radius: 8px; padding: 10px 12px; margin-top: 8px; font-size: 12px; color: rgba(255,255,255,0.65); line-height: 1.5; display: none; }
 .aviso-imposto b { color: #faa828; }
-
-/* Meta de margem */
 .meta-section { margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.07); padding-top: 12px; }
-.meta-resultado { background: #111114; border-radius: 8px; padding: 12px 14px; margin-top: 10px; display: none; }
-.meta-resultado-label { font-size: 11px; font-weight: bold; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 4px; }
-.meta-resultado-val { font-size: 24px; font-weight: bold; color: #5cc98a; }
-.meta-resultado-sub { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 4px; }
-
-/* Resultado */
+.meta-box { background: #111114; border-radius: 10px; padding: 14px; margin-top: 10px; display: none; border: 1px solid rgba(92,201,138,0.2); }
+.meta-box-titulo { font-size: 11px; font-weight: bold; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 10px; }
+.meta-preco-label { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+.meta-preco-val { font-size: 28px; font-weight: bold; color: #5cc98a; margin-bottom: 10px; }
+.meta-detalhe { font-size: 12px; color: rgba(255,255,255,0.35); margin-bottom: 3px; }
+.meta-detalhe b { color: rgba(255,255,255,0.6); }
+.indicador { display: flex; align-items: center; gap: 8px; margin-top: 10px; background: rgba(92,201,138,0.08); border-radius: 8px; padding: 10px 12px; }
+.indicador-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.indicador-txt { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.4; }
 .row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 15px; border-bottom: 1px solid rgba(255,255,255,0.06); }
 .row:last-child { border: none; }
 .rl { color: rgba(255,255,255,0.45); }
@@ -68,8 +65,6 @@ body { background: #111114; font-family: Arial, Helvetica, sans-serif; padding: 
 .minilb { font-size: 12px; color: rgba(255,255,255,0.35); margin-bottom: 4px; }
 .minivl { font-size: 18px; font-weight: bold; }
 .wm { text-align: right; font-size: 11px; color: rgba(255,255,255,0.08); letter-spacing: 0.15em; text-transform: uppercase; padding: 6px 4px 16px; }
-
-/* Alertas */
 .alerta { border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; display: none; }
 .alerta-aviso { background: rgba(250,168,40,0.12); border: 1px solid rgba(250,168,40,0.35); }
 .alerta-dica  { background: rgba(92,201,138,0.10); border: 1px solid rgba(92,201,138,0.3); }
@@ -78,9 +73,6 @@ body { background: #111114; font-family: Arial, Helvetica, sans-serif; padding: 
 .alerta-dica  .alerta-titulo { color: #5cc98a; }
 .alerta-texto { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.5; }
 .alerta-destaque { font-weight: bold; color: #fff; }
-
-/* Divisor extras no resumo */
-.row-extras-titulo { font-size: 11px; font-weight: bold; color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 0.07em; padding: 8px 0 4px; border-bottom: none; }
 </style>
 </head>
 <body>
@@ -99,7 +91,6 @@ body { background: #111114; font-family: Arial, Helvetica, sans-serif; padding: 
   </div>
 </div>
 
-<!-- ENTRADAS PRINCIPAIS -->
 <div class="card">
   <div class="sec">Entradas</div>
   <div class="field">
@@ -115,7 +106,6 @@ body { background: #111114; font-family: Arial, Helvetica, sans-serif; padding: 
     </div>
   </div>
 
-  <!-- CUSTOS EXTRAS (aba escondida) -->
   <div style="margin-top:14px;border-top:1px solid rgba(255,255,255,0.07);padding-top:12px;">
     <div class="extras-toggle" id="extrasToggle">
       <span class="extras-toggle-label">+ Custos extras</span>
@@ -126,35 +116,30 @@ body { background: #111114; font-family: Arial, Helvetica, sans-serif; padding: 
     </div>
 
     <div class="extras-body" id="extrasBody">
-
       <div class="field" style="margin-top:12px;">
         <label for="etiqueta">Etiqueta</label>
         <div class="irow"><span class="cur">R$</span>
           <input type="number" id="etiqueta" placeholder="0,00" min="0" step="0.01" inputmode="decimal" autocomplete="off" />
         </div>
       </div>
-
       <div class="field">
         <label for="embalagem">Embalagem</label>
         <div class="irow"><span class="cur">R$</span>
           <input type="number" id="embalagem" placeholder="0,00" min="0" step="0.01" inputmode="decimal" autocomplete="off" />
         </div>
       </div>
-
       <div class="field">
         <label for="frete">Frete</label>
         <div class="irow"><span class="cur">R$</span>
           <input type="number" id="frete" placeholder="0,00" min="0" step="0.01" inputmode="decimal" autocomplete="off" />
         </div>
       </div>
-
       <div class="field">
         <label for="maoobra">Mao de obra</label>
         <div class="irow"><span class="cur">R$</span>
           <input type="number" id="maoobra" placeholder="0,00" min="0" step="0.01" inputmode="decimal" autocomplete="off" />
         </div>
       </div>
-
       <div class="field">
         <label for="imposto">Imposto (% Simples Nacional)</label>
         <div class="irow">
@@ -162,36 +147,41 @@ body { background: #111114; font-family: Arial, Helvetica, sans-serif; padding: 
           <span class="pct-suf">%</span>
         </div>
         <div class="aviso-imposto" id="avisoImposto">
-          <b>Como funciona:</b> O imposto do Simples Nacional e calculado sobre o <b>valor total da nota fiscal</b> (preco de venda), nao sobre o lucro. Por exemplo: se voce vende por R$ 100 e sua aliquota e 6%, o imposto sera R$ 6,00 independente do seu lucro.
+          <b>Como funciona:</b> O imposto do Simples Nacional e calculado sobre o <b>valor total da nota fiscal</b> (preco de venda), nao sobre o lucro. Exemplo: venda de R$ 100 com aliquota de 6% = R$ 6,00 de imposto.
         </div>
       </div>
 
-      <!-- META DE MARGEM -->
       <div class="meta-section">
-        <div class="sec" style="margin-bottom:8px;">Meta de lucro</div>
+        <div class="sec" style="margin-bottom:8px;">Valor que desejo receber liquido</div>
         <div class="field">
-          <label for="metalucro">Quanto voce quer lucrar?</label>
+          <label for="metalucro">Quanto voce quer receber no bolso?</label>
           <div class="irow"><span class="cur">R$</span>
             <input type="number" id="metalucro" placeholder="0,00" min="0" step="0.01" inputmode="decimal" autocomplete="off" />
           </div>
         </div>
         <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:6px;line-height:1.5;">
-          Informe o lucro desejado e a calculadora mostra o preco minimo que voce precisa cobrar para atingi-lo, ja considerando todos os custos acima.
+          Informe o valor liquido desejado (ja descontando taxa Shopee e todos os custos) e veja o preco ideal para cobrar.
         </div>
-        <div class="meta-resultado" id="metaResultado">
-          <div class="meta-resultado-label">Preco minimo de venda</div>
-          <div class="meta-resultado-val" id="metaPreco">--</div>
-          <div class="meta-resultado-sub" id="metaSub">--</div>
+        <div class="meta-box" id="metaBox">
+          <div class="meta-box-titulo">Resultado da meta</div>
+          <div class="meta-preco-label">Voce precisa cobrar pelo menos:</div>
+          <div class="meta-preco-val" id="metaPreco">--</div>
+          <div class="meta-detalhe" id="metaDetTaxa"></div>
+          <div class="meta-detalhe" id="metaDetExtras"></div>
+          <div class="meta-detalhe" id="metaDetCusto"></div>
+          <div class="meta-detalhe" id="metaDetLiquido"></div>
+          <div class="indicador" id="metaIndicador">
+            <div class="indicador-dot" id="metaDot"></div>
+            <div class="indicador-txt" id="metaIndicadorTxt"></div>
+          </div>
         </div>
       </div>
-
     </div>
   </div>
 
   <button type="button" class="btn" id="btnCalc">Calcular</button>
 </div>
 
-<!-- ALERTA VIRADA DE FAIXA -->
 <div class="alerta alerta-aviso" id="alerta-virada">
   <div class="alerta-titulo">&#9888; Atencao: virada de faixa!</div>
   <div class="alerta-texto" id="alerta-virada-texto"></div>
@@ -201,7 +191,6 @@ body { background: #111114; font-family: Arial, Helvetica, sans-serif; padding: 
   <div class="alerta-texto" id="alerta-dica-texto"></div>
 </div>
 
-<!-- RESUMO -->
 <div class="card">
   <div class="ch">
     <div class="sec" style="margin:0;">Resumo</div>
@@ -209,16 +198,13 @@ body { background: #111114; font-family: Arial, Helvetica, sans-serif; padding: 
   </div>
   <div class="row"><span class="rl">Preco de venda</span><span class="rv" id="o-venda">--</span></div>
   <div class="row"><span class="rl">Taxa Shopee</span><span class="rn" id="o-taxa">--</span></div>
-  <div class="row"><span class="rl">Valor recebido</span><span class="rv" id="o-rec">--</span></div>
+  <div class="row"><span class="rl">Valor recebido Shopee</span><span class="rv" id="o-rec">--</span></div>
   <div class="row"><span class="rl">Custo do produto</span><span class="rn" id="o-custo">--</span></div>
-
-  <!-- linhas extras (aparecem só se preenchidas) -->
-  <div class="row" id="row-etiqueta" style="display:none;"><span class="rl">Etiqueta</span><span class="rn" id="o-etiqueta">--</span></div>
+  <div class="row" id="row-etiqueta"  style="display:none;"><span class="rl">Etiqueta</span><span class="rn" id="o-etiqueta">--</span></div>
   <div class="row" id="row-embalagem" style="display:none;"><span class="rl">Embalagem</span><span class="rn" id="o-embalagem">--</span></div>
-  <div class="row" id="row-frete" style="display:none;"><span class="rl">Frete</span><span class="rn" id="o-frete">--</span></div>
-  <div class="row" id="row-maoobra" style="display:none;"><span class="rl">Mao de obra</span><span class="rn" id="o-maoobra">--</span></div>
-  <div class="row" id="row-imposto" style="display:none;"><span class="rl">Imposto (NF)</span><span class="rn" id="o-imposto">--</span></div>
-
+  <div class="row" id="row-frete"     style="display:none;"><span class="rl">Frete</span><span class="rn" id="o-frete">--</span></div>
+  <div class="row" id="row-maoobra"   style="display:none;"><span class="rl">Mao de obra</span><span class="rn" id="o-maoobra">--</span></div>
+  <div class="row" id="row-imposto"   style="display:none;"><span class="rl">Imposto (NF)</span><span class="rn" id="o-imposto">--</span></div>
   <div class="lucro">
     <div>
       <div class="ll">Lucro liquido</div>
@@ -230,14 +216,8 @@ body { background: #111114; font-family: Arial, Helvetica, sans-serif; padding: 
     </div>
   </div>
   <div class="g2">
-    <div class="mini">
-      <div class="minilb">Taxa total</div>
-      <div class="minivl" id="o-taxapct" style="color:#f07a60;">--</div>
-    </div>
-    <div class="mini">
-      <div class="minilb">Margem</div>
-      <div class="minivl" id="o-marg2" style="color:#5cc98a;">--</div>
-    </div>
+    <div class="mini"><div class="minilb">Taxa total</div><div class="minivl" id="o-taxapct" style="color:#f07a60;">--</div></div>
+    <div class="mini"><div class="minilb">Margem</div><div class="minivl" id="o-marg2" style="color:#5cc98a;">--</div></div>
   </div>
 </div>
 
@@ -267,86 +247,145 @@ function getTaxa(p) {
   if (p <= 79.99)  return p * 20 / 100 + 4;
   if (p <= 99.99)  return p * 14 / 100 + 16;
   if (p <= 199.99) return p * 14 / 100 + 20;
-  return p * 14 / 100 + 26;
+  if (p <= 499.99) return p * 14 / 100 + 26;
+  return p * 14 / 100 + 28;
 }
 
-function getCustosExtras(preco) {
-  var etiqueta  = val('etiqueta');
-  var embalagem = val('embalagem');
-  var frete     = val('frete');
-  var maoobra   = val('maoobra');
-  var aliqImp   = val('imposto');
-  var imposto   = preco * aliqImp / 100;
-  return { etiqueta: etiqueta, embalagem: embalagem, frete: frete, maoobra: maoobra, imposto: imposto, aliqImp: aliqImp,
-           total: etiqueta + embalagem + frete + maoobra + imposto };
+function getExtrasFixos() {
+  return (val('etiqueta') + val('embalagem') + val('frete') + val('maoobra'));
 }
 
-/* Calcula preco minimo para atingir meta de lucro (busca binaria) */
-function calcPrecoMeta(custo, metaLucro) {
-  var p = 0.01;
-  for (var i = 0; i < 10000; i++) {
-    var taxa   = getTaxa(p);
-    var extras = getCustosExtras(p);
-    var lucro  = p - taxa - custo - extras.total;
-    if (lucro >= metaLucro) return p;
-    p += 0.01;
+function getImposto(p) {
+  return p * val('imposto') / 100;
+}
+
+function getLiquido(p, custo) {
+  return p - getTaxa(p) - custo - getExtrasFixos() - getImposto(p);
+}
+
+/* Calcula preco minimo para receber valor liquido desejado
+   Resolve algebricamente por faixa para ser preciso */
+function calcPrecoMeta(custo, metaLiquido) {
+  var fixos = custo + getExtrasFixos();
+  var aliqImp = val('imposto') / 100;
+
+  /* Tenta resolver em cada faixa:
+     faixa 1: p <= 79.99  → taxa = 0.20p + 4  → liquido = p*(0.80 - aliqImp) - 4  - fixos
+     faixa 2: p <= 99.99  → taxa = 0.14p + 16 → liquido = p*(0.86 - aliqImp) - 16 - fixos
+     faixa 3: p <= 199.99 → taxa = 0.14p + 20 → liquido = p*(0.86 - aliqImp) - 20 - fixos
+     faixa 4: p <= 499.99 → taxa = 0.14p + 26 → liquido = p*(0.86 - aliqImp) - 26 - fixos
+     faixa 5: p > 499.99  → taxa = 0.14p + 28 → liquido = p*(0.86 - aliqImp) - 28 - fixos
+  */
+  var faixas = [
+    { coef: 0.80 - aliqImp, constante: 4,  min: 0,      max: 79.99  },
+    { coef: 0.86 - aliqImp, constante: 16, min: 80,     max: 99.99  },
+    { coef: 0.86 - aliqImp, constante: 20, min: 100,    max: 199.99 },
+    { coef: 0.86 - aliqImp, constante: 26, min: 200,    max: 499.99 },
+    { coef: 0.86 - aliqImp, constante: 28, min: 500,    max: 99999  }
+  ];
+
+  for (var i = 0; i < faixas.length; i++) {
+    var f = faixas[i];
+    if (f.coef <= 0) continue; // imposto impossivel
+    // metaLiquido = p*coef - constante - fixos
+    // p = (metaLiquido + constante + fixos) / coef
+    var p = (metaLiquido + f.constante + fixos) / f.coef;
+    p = Math.ceil(p * 100) / 100; // arredonda pra cima no centavo
+    if (p >= f.min && p <= f.max) return p;
   }
   return null;
 }
 
-/* Toggle aba extras */
+/* Toggle */
 document.getElementById('extrasToggle').addEventListener('click', function() {
   var body  = document.getElementById('extrasBody');
   var arrow = document.getElementById('extrasArrow');
-  var open  = body.classList.contains('open');
-  if (open) { body.classList.remove('open'); arrow.classList.remove('open'); }
-  else      { body.classList.add('open');    arrow.classList.add('open'); }
+  if (body.classList.contains('open')) {
+    body.classList.remove('open'); arrow.classList.remove('open');
+  } else {
+    body.classList.add('open'); arrow.classList.add('open');
+  }
 });
 
-/* Mostrar aviso imposto ao focar no campo */
 document.getElementById('imposto').addEventListener('focus', function() {
   show('avisoImposto');
 });
 
-/* Atualizar badge extras e meta em tempo real */
 function atualizarMeta() {
-  var custo     = val('custo');
-  var metaLucro = val('metalucro');
-  if (metaLucro <= 0) { hide('metaResultado'); return; }
+  var custo      = val('custo');
+  var metaLiq    = val('metalucro');
+  var precoAtual = val('preco');
 
-  var precoMin = calcPrecoMeta(custo, metaLucro);
-  if (precoMin) {
-    show('metaResultado');
-    set('metaPreco', fmt(Math.ceil(precoMin * 100) / 100));
-    var taxaMin   = getTaxa(precoMin);
-    var extrasMin = getCustosExtras(precoMin);
-    set('metaSub', 'Taxa Shopee: ' + fmt(taxaMin) + ' | Custos extras: ' + fmt(extrasMin.total));
+  if (metaLiq <= 0) { hide('metaBox'); return; }
+
+  var precoIdeal = calcPrecoMeta(custo, metaLiq);
+  if (!precoIdeal) {
+    show('metaBox');
+    set('metaPreco', 'Impossivel calcular');
+    set('metaDetTaxa', '');
+    set('metaDetExtras', '');
+    set('metaDetCusto', '');
+    set('metaDetLiquido', '');
+    hide('metaIndicador');
+    return;
+  }
+
+  var taxaIdeal    = getTaxa(precoIdeal);
+  var extrasFixos  = getExtrasFixos();
+  var impostoIdeal = getImposto(precoIdeal);
+  var liquidoIdeal = getLiquido(precoIdeal, custo);
+
+  show('metaBox');
+  set('metaPreco', fmt(precoIdeal));
+  set('metaDetTaxa',     'Taxa Shopee: <b>' + fmt(taxaIdeal) + '</b>');
+  set('metaDetExtras',   'Custos extras: <b>' + fmt(extrasFixos + impostoIdeal) + '</b>');
+  set('metaDetCusto',    'Custo produto: <b>' + fmt(custo) + '</b>');
+  set('metaDetLiquido',  'Voce recebera: <b>' + fmt(liquidoIdeal) + '</b>');
+
+  showF('metaIndicador');
+  var dot = document.getElementById('metaDot');
+  var txt = document.getElementById('metaIndicadorTxt');
+  if (precoAtual > 0) {
+    var difLiq = getLiquido(precoAtual, custo) - metaLiq;
+    if (difLiq >= 0) {
+      dot.style.background = '#5cc98a';
+      txt.innerHTML = 'Seu preco atual (' + fmt(precoAtual) + ') ja atinge a meta. Voce recebe <b>' + fmt(difLiq) + ' a mais</b> do que o desejado.';
+    } else {
+      dot.style.background = '#f07a60';
+      txt.innerHTML = 'Seu preco atual (' + fmt(precoAtual) + ') esta <b>' + fmt(-difLiq) + ' abaixo</b> da meta. Ajuste para ' + fmt(precoIdeal) + '.';
+    }
   } else {
-    show('metaResultado');
-    set('metaPreco', 'Nao calculavel');
-    set('metaSub', '');
+    dot.style.background = '#faa828';
+    txt.innerHTML = 'Digite o preco de venda para comparar com a meta.';
   }
 }
-document.getElementById('metalucro').addEventListener('input', atualizarMeta);
-document.getElementById('custo').addEventListener('input', atualizarMeta);
+
+['custo','preco','metalucro','etiqueta','embalagem','frete','maoobra','imposto'].forEach(function(id) {
+  var el = document.getElementById(id);
+  if (el) el.addEventListener('input', atualizarMeta);
+});
 
 function calcular() {
   var custo = val('custo');
   var preco = val('preco');
   if (preco <= 0) { alert('Digite o preco de venda!'); return; }
 
-  var taxa   = getTaxa(preco);
-  var extras = getCustosExtras(preco);
+  var taxa         = getTaxa(preco);
+  var extrasFixos  = getExtrasFixos();
+  var impostoVal   = getImposto(preco);
+  var totalExtras  = extrasFixos + impostoVal;
+
   var faixa;
   if      (preco <= 79.99)  faixa = 'ate R$79,99';
   else if (preco <= 99.99)  faixa = 'R$80-99,99';
   else if (preco <= 199.99) faixa = 'R$100-199,99';
-  else                      faixa = 'acima R$200';
+  else if (preco <= 499.99) faixa = 'R$200-499,99';
+  else                      faixa = 'acima R$500';
 
-  var recebido  = preco - taxa;
-  var lucro     = recebido - custo - extras.total;
-  var margem    = lucro / preco * 100;
-  var taxapct   = taxa  / preco * 100;
+  var recebido = preco - taxa;
+  var lucro    = recebido - custo - totalExtras;
+  var margem   = lucro / preco * 100;
+  var taxapct  = taxa  / preco * 100;
 
   set('faixa',   faixa);
   set('o-venda', fmt(preco));
@@ -354,57 +393,49 @@ function calcular() {
   set('o-rec',   fmt(recebido));
   set('o-custo', '- ' + fmt(custo));
 
-  /* Linhas extras no resumo */
   function rowExtra(rowId, outId, v) {
-    if (v > 0) { showF(rowId); set(outId, '- ' + fmt(v)); }
-    else hide(rowId);
+    if (v > 0) { showF(rowId); set(outId, '- ' + fmt(v)); } else hide(rowId);
   }
-  rowExtra('row-etiqueta',  'o-etiqueta',  extras.etiqueta);
-  rowExtra('row-embalagem', 'o-embalagem', extras.embalagem);
-  rowExtra('row-frete',     'o-frete',     extras.frete);
-  rowExtra('row-maoobra',   'o-maoobra',   extras.maoobra);
-  rowExtra('row-imposto',   'o-imposto',   extras.imposto);
+  rowExtra('row-etiqueta',  'o-etiqueta',  val('etiqueta'));
+  rowExtra('row-embalagem', 'o-embalagem', val('embalagem'));
+  rowExtra('row-frete',     'o-frete',     val('frete'));
+  rowExtra('row-maoobra',   'o-maoobra',   val('maoobra'));
+  rowExtra('row-imposto',   'o-imposto',   impostoVal);
 
   set('o-lucro',  (lucro  < 0 ? '- ' : '') + fmt(lucro));  cor('o-lucro', lucro  < 0 ? '#f07a60' : '#5cc98a');
   set('o-marg',   (margem < 0 ? '-'  : '') + pct(margem)); cor('o-marg',  margem < 0 ? '#f07a60' : '#5cc98a');
   set('o-marg2',  (margem < 0 ? '-'  : '') + pct(margem)); cor('o-marg2', margem < 0 ? '#f07a60' : '#5cc98a');
   set('o-taxapct', pct(taxapct));
 
-  /* Badge extras ativo */
-  var temExtras = extras.total > 0;
   var badgeEl = document.getElementById('extrasBadge');
-  if (badgeEl) badgeEl.style.display = temExtras ? 'inline-block' : 'none';
+  if (badgeEl) badgeEl.style.display = totalExtras > 0 ? 'inline-block' : 'none';
 
-  /* Alertas virada de faixa */
   hide('alerta-virada'); hide('alerta-dica');
-  var viradas = [79.99, 99.99, 199.99];
+  var viradas = [79.99, 99.99, 199.99, 499.99];
   for (var i = 0; i < viradas.length; i++) {
     var lim = viradas[i];
     if (preco > lim && preco <= lim + 5) {
       var taxaAtual = getTaxa(preco);
       var taxaTeto  = getTaxa(lim);
       var difTaxa   = taxaAtual - taxaTeto;
-      var lucroTeto = lim - taxaTeto - custo - getCustosExtras(lim).total;
-      var difLucro  = lucro - lucroTeto;
+      var lucroTeto = getLiquido(lim, custo);
 
       set('alerta-virada-texto',
         'Vendendo por <span class="alerta-destaque">' + fmt(preco) + '</span> a taxa e <span class="alerta-destaque">' + fmt(taxaAtual) + '</span>. ' +
-        'Vendendo por <span class="alerta-destaque">' + fmt(lim) + '</span> seria apenas <span class="alerta-destaque">' + fmt(taxaTeto) + '</span> ' +
-        '(diferenca de <span class="alerta-destaque">' + fmt(difTaxa) + '</span> a mais em taxa).');
+        'Vendendo por <span class="alerta-destaque">' + fmt(lim) + '</span> seria <span class="alerta-destaque">' + fmt(taxaTeto) + '</span> ' +
+        '(<span class="alerta-destaque">' + fmt(difTaxa) + ' a menos</span> em taxa).');
       show('alerta-virada');
 
       if (lucroTeto > lucro) {
         set('alerta-dica-texto',
-          'Vendendo por <span class="alerta-destaque">' + fmt(lim) + '</span> voce lucraria <span class="alerta-destaque">' + fmt(lucroTeto) + '</span>, ' +
-          'que e <span class="alerta-destaque">' + fmt(-difLucro) + ' a mais</span> do que vendendo por ' + fmt(preco) + '. ' +
-          'Considere usar o preco <span class="alerta-destaque">' + fmt(lim) + '</span>!');
+          'Vendendo por <span class="alerta-destaque">' + fmt(lim) + '</span> voce receberia <span class="alerta-destaque">' + fmt(lucroTeto) + '</span> liquido, ' +
+          'ou seja <span class="alerta-destaque">' + fmt(lucroTeto - lucro) + ' a mais</span> do que vendendo por ' + fmt(preco) + '.');
         show('alerta-dica');
       }
       break;
     }
   }
 
-  /* Atualizar meta apos calcular */
   atualizarMeta();
 }
 
